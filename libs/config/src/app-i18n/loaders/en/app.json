@@ -1,0 +1,12 @@
+{
+	"AUTHOR": {
+		"NOT_FOUND": "Author not found lol"
+	},
+	"EDITOR": {
+		"NOT_FOUND": "Editor not found"
+	},
+	"USER": {
+		"WRONG_CREDENTIALS": "Wrong user credentials",
+		"NOT_FOUND": "User not found"
+	}
+}

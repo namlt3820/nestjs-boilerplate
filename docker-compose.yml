@@ -1,0 +1,67 @@
+version: '2'
+
+services:
+  postgresql:
+    container_name: nest_boilerplate_postgres
+    image: 'postgres:latest'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGDATA: /data/postgres
+      POSTGRES_USER: postgres
+    volumes:
+      - 'postgres_data:/data/postgres'
+    networks:
+      - app-network
+
+  mongodb:
+    container_name: nest_boilerplate_mongo
+    image: mongo
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    volumes:
+      - 'mongodb_data:/data/db'
+    networks:
+      - app-network
+
+  redis:
+    container_name: nest_boilerplate_redis
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass redis_123
+    volumes:
+      - 'redis_data:/data'
+    networks:
+      - app-network
+
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: nest_boilerplate_mosquitto
+    restart: unless-stopped
+    volumes:
+      - ./mosquitto:/mosquitto
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    ports:
+      - 1883:1883
+      - 9002:9001
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+    driver: local
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge

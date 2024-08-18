@@ -1,0 +1,12 @@
+{
+	"AUTHOR": {
+		"NOT_FOUND": "Không tìm thấy tác giả"
+	},
+	"EDITOR": {
+		"NOT_FOUND": "Không tìm thấy biên tập viên"
+	},
+	"USER": {
+		"WRONG_CREDENTIALS": "Sai thông tin đăng nhập",
+		"NOT_FOUND": "Không tìm thấy người dùng"
+	}
+}

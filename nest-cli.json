@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/nestjs-boilerplate/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/nestjs-boilerplate/tsconfig.app.json"
+  },
+  "defaultLibraryPrefix": "@lib",
+  "monorepo": true,
+  "root": "apps/nestjs-boilerplate",
+  "projects": {
+    "nestjs-boilerplate": {
+      "type": "application",
+      "root": "apps/nestjs-boilerplate",
+      "entryFile": "main",
+      "sourceRoot": "apps/nestjs-boilerplate/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/nestjs-boilerplate/tsconfig.app.json"
+      }
+    },
+    "config": {
+      "type": "library",
+      "root": "libs/config",
+      "entryFile": "index",
+      "sourceRoot": "libs/config/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/config/tsconfig.lib.json"
+      }
+    },
+    "use-case": {
+      "type": "library",
+      "root": "libs/use-case",
+      "entryFile": "index",
+      "sourceRoot": "libs/use-case/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/use-case/tsconfig.lib.json"
+      }
+    }
+  }
+}
