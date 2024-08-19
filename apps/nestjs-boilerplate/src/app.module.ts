@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { AppConfigModule } from '@lib/config';
+import { AppCacheModule } from '@lib/config/app-cache';
 import { AppI18nModule } from '@lib/config/app-i18n';
 import { AppMongooseModule } from '@lib/config/app-mongoose';
 import { AppSequelizeModule } from '@lib/config/app-sequelize';
@@ -17,6 +18,7 @@ import { AppService } from './app.service';
     AppMongooseModule,
     AppTypeOrmModule,
     AppSequelizeModule,
+    AppCacheModule,
 
     // use-case modules
   ],
