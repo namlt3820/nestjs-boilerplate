@@ -1,6 +1,0 @@
-1724034615: mosquitto version 2.0.18 starting
-1724034615: Config loaded from /mosquitto/config/mosquitto.conf.
-1724034615: Opening ipv4 listen socket on port 1883.
-1724034615: Opening ipv6 listen socket on port 1883.
-1724034615: mosquitto version 2.0.18 running
-1724036416: Saving in-memory database to /mosquitto/data//mosquitto.db.

@@ -6,11 +6,7 @@ import {
   Repository,
 } from 'typeorm';
 
-import { IRepository } from './IRepository';
-
-export class GenericRepository<T extends { id: string }>
-  implements IRepository<T>
-{
+export class GenericRepository<T extends { id: string }> {
   private readonly repository: Repository<T>;
 
   constructor(
