@@ -8,7 +8,7 @@ import { CreateAuthorRequest } from './create-author.request';
 import { CreateAuthorResponse } from './create-author.response';
 import { CreateAuthorService } from './create-author.service';
 
-@Controller('author')
+@Controller('authors')
 export class CreateAuthorController {
   constructor(private readonly createAuthorService: CreateAuthorService) {}
 

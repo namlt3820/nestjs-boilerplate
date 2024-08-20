@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 
 import { CreateAuthorModule } from './create-author';
+import { GetAuthorsModule } from './get-authors';
 
 @Module({
-  imports: [CreateAuthorModule],
+  imports: [CreateAuthorModule, GetAuthorsModule],
   providers: [],
   exports: [],
 })

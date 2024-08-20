@@ -2,6 +2,12 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class BaseResponseDto {
   @ApiProperty()
+  _id: string;
+
+  @ApiPropertyOptional()
+  id: string;
+
+  @ApiProperty()
   created_at: number;
 
   @ApiProperty()

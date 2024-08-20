@@ -9,9 +9,6 @@ import { AppSequelizeModule } from '@lib/config/app-sequelize';
 import { AppTypeOrmModule } from '@lib/config/app-typeorm';
 import { AuthorModule } from '@lib/use-case/author';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-
 @Module({
   imports: [
     // config modules
@@ -26,7 +23,7 @@ import { AppService } from './app.service';
     // use-case modules
     AuthorModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

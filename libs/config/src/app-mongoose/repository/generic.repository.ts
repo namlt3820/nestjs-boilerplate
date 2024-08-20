@@ -1,3 +1,4 @@
+import { isNil, omitBy } from 'lodash';
 import {
   ClientSession,
   Document,
@@ -37,8 +38,10 @@ export class GenericRepository<T extends Document> {
     filter: FilterQuery<T> = {},
     paginationOptions: PaginationOptions = {},
   ): Promise<PaginateResult<T>> {
-    const { page = 1, limit = 10, session } = paginationOptions;
-    return this.model.paginate(filter, {
+    const sanitizedFilter = omitBy(filter, isNil);
+    const { page = 1, limit = 1, session } = paginationOptions;
+
+    return this.model.paginate(sanitizedFilter, {
       page,
       limit,
       session,
