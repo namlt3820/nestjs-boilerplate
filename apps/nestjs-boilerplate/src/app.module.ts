@@ -8,6 +8,7 @@ import { AppMongooseModule } from '@lib/config/app-mongoose';
 import { AppSequelizeModule } from '@lib/config/app-sequelize';
 import { AppTypeOrmModule } from '@lib/config/app-typeorm';
 import { AuthorModule } from '@lib/use-case/author';
+import { ExceptionModule } from '@lib/use-case/exception';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AuthorModule } from '@lib/use-case/author';
     AppMicroserviceModule,
 
     // use-case modules
+    ExceptionModule,
     AuthorModule,
   ],
   controllers: [],

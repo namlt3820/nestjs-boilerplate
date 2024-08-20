@@ -56,9 +56,11 @@ export class GenericRepository<T extends Document> {
     options: { new: boolean } = { new: true },
     session?: ClientSession,
   ): Promise<T | null> {
-    return this.model
+    const updatedDocument = await this.model
       .findByIdAndUpdate(id, updateDto, { ...options, session })
       .exec();
+
+    return updatedDocument ? updatedDocument.toObject() : null;
   }
 
   async delete(id: string, session?: ClientSession): Promise<T | null> {
