@@ -6,7 +6,7 @@ export const setExceptionCode = (exception: any): number => {
     return exception.exceptionCode;
   }
 
-  const response = exception.getResponse();
+  const response = exception.getResponse ? exception.getResponse() : null;
 
   if (response?.message === 'Unauthorized' && response?.statusCode === 401) {
     return ExceptionCode.USER.UNAUTHORIZED;

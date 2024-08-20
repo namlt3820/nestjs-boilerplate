@@ -1,18 +1,8 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
-export class BaseResponseDto {
+export class BaseResponse {
   @ApiProperty()
-  _id: string;
+  exception_code: number;
 
-  @ApiPropertyOptional()
-  id: string;
-
-  @ApiProperty()
-  created_at: number;
-
-  @ApiProperty()
-  updated_at: number;
-
-  @ApiPropertyOptional()
-  deleted_at: number;
+  data: any;
 }

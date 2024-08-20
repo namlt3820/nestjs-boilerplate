@@ -24,7 +24,8 @@ export class GenericRepository<T extends Document> {
   }
 
   async findById(id: string, session?: ClientSession): Promise<T | null> {
-    return this.model.findById(id).session(session).exec();
+    const document = await this.model.findById(id).session(session).exec();
+    return document ? document.toObject() : null;
   }
 
   async findOne(

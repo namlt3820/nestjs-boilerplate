@@ -2,7 +2,7 @@ import { plainToInstance } from 'class-transformer';
 
 import { ExceptionCode } from '@lib/use-case/exception';
 
-import { BaseResponse } from './base-response';
+import { BaseResponse } from './base-response.dto';
 
 export const createResponse = (
   ctor,
