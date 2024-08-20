@@ -4,7 +4,7 @@ import * as mongoosePaginate from 'mongoose-paginate-v2';
 
 import { Generic } from './generic';
 
-export type AuthorDocument = HydratedDocument<Author>;
+type AuthorDocument = HydratedDocument<Author>;
 
 @Schema({
   collection: 'authors',
@@ -13,7 +13,7 @@ export type AuthorDocument = HydratedDocument<Author>;
     updatedAt: 'updated_at',
   },
 })
-export class Author extends Generic {
+class Author extends Generic {
   @Prop()
   first_name: string;
 
@@ -24,6 +24,8 @@ export class Author extends Generic {
   address: string;
 }
 
-export const AuthorSchema = SchemaFactory.createForClass(Author);
+const AuthorSchema = SchemaFactory.createForClass(Author);
 
 AuthorSchema.plugin(mongoosePaginate);
+
+export { Author, AuthorDocument, AuthorSchema };

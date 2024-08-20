@@ -6,35 +6,32 @@ import {
   MongooseModuleAsyncOptions,
 } from '@nestjs/mongoose';
 
-import { Author, AuthorSchema, Book, BookSchema } from './schema';
+import { AuthorSchema, BookSchema } from './schema';
 
 const mongooseModuleAsyncOptions: MongooseModuleAsyncOptions = {
   inject: [ConfigService],
   useFactory: async (configService: ConfigService) => {
     return {
       uri: configService.get<string>('mongo.uri'),
-      dbName: configService.get<string>('mongo.database'),
+      dbName: configService.get<string>('mongo.dbName'),
     };
   },
 };
 
-export const BookModelDefinition: ModelDefinition = {
-  name: Book.name,
+export const BookModel: ModelDefinition = {
+  name: 'books',
   schema: BookSchema,
+  collection: 'books',
 };
 
-export const AuthorModelDefinition: ModelDefinition = {
-  name: Author.name,
+export const AuthorModel: ModelDefinition = {
+  name: 'authors',
   schema: AuthorSchema,
+  collection: 'authors',
 };
-
-const models: ModelDefinition[] = [BookModelDefinition, AuthorModelDefinition];
 
 @Module({
-  imports: [
-    MongooseModule.forRootAsync(mongooseModuleAsyncOptions),
-    MongooseModule.forFeature(models),
-  ],
+  imports: [MongooseModule.forRootAsync(mongooseModuleAsyncOptions)],
   providers: [],
   exports: [],
 })

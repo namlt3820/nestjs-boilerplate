@@ -5,7 +5,7 @@ import * as mongoosePaginate from 'mongoose-paginate-v2';
 import { Author, AuthorDocument } from './author.schema';
 import { Generic } from './generic';
 
-export type BookDocument = HydratedDocument<Book>;
+type BookDocument = HydratedDocument<Book>;
 
 @Schema({
   collection: 'books',
@@ -20,7 +20,7 @@ export type BookDocument = HydratedDocument<Book>;
     virtuals: true,
   },
 })
-export class Book extends Generic {
+class Book extends Generic {
   @Prop([String])
   author_ids: string[];
 
@@ -30,7 +30,7 @@ export class Book extends Generic {
   authors?: AuthorDocument[];
 }
 
-export const BookSchema = SchemaFactory.createForClass(Book);
+const BookSchema = SchemaFactory.createForClass(Book);
 
 BookSchema.virtual('authors', {
   ref: Author.name,
@@ -39,3 +39,5 @@ BookSchema.virtual('authors', {
 });
 
 BookSchema.plugin(mongoosePaginate);
+
+export { Book, BookDocument, BookSchema };

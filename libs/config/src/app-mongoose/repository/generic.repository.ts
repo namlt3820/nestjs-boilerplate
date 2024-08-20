@@ -10,11 +10,16 @@ import {
 import { PaginationOptions } from '@lib/use-case/types/paginationOptions';
 
 export class GenericRepository<T extends Document> {
-  constructor(private readonly model: PaginateModel<T>) {}
+  protected readonly model: PaginateModel<T>;
+
+  constructor(model: PaginateModel<T>) {
+    this.model = model;
+  }
 
   async create(createDto: Partial<T>, session?: ClientSession): Promise<T> {
     const createdDocument = new this.model(createDto);
-    return createdDocument.save({ session });
+    const savedDocument = await createdDocument.save({ session });
+    return savedDocument.toObject();
   }
 
   async findById(id: string, session?: ClientSession): Promise<T | null> {

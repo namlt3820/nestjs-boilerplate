@@ -1,15 +1,14 @@
-import mongoose from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { PaginateModel } from 'mongoose';
 
-import { BookDocument, BookSchema } from '../schema';
+import { BookDocument } from '../schema';
 import { GenericRepository } from './generic.repository';
 
-const BookModel = mongoose.model<
-  BookDocument,
-  mongoose.PaginateModel<BookDocument>
->('books', BookSchema, 'books');
-
 export class BookRepository extends GenericRepository<BookDocument> {
-  constructor() {
-    super(BookModel);
+  constructor(
+    @InjectModel('books')
+    protected bookModel: PaginateModel<BookDocument>,
+  ) {
+    super(bookModel);
   }
 }
