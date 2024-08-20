@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { CreateAuthorModule } from './create-author';
+import { DeleteAuthorModule } from './delete-author';
 import { GetAuthorModule } from './get-author';
 import { GetAuthorsModule } from './get-authors';
 import { UpdateAuthorModule } from './update-author';
@@ -11,6 +12,7 @@ import { UpdateAuthorModule } from './update-author';
     GetAuthorsModule,
     GetAuthorModule,
     UpdateAuthorModule,
+    DeleteAuthorModule,
   ],
   providers: [],
   exports: [],

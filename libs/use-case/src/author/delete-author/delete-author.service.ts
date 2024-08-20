@@ -1,17 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { HttpStatus } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 
 import { AuthorRepository } from '@lib/config/app-mongoose';
 import { ExceptionService } from '@lib/use-case/exception';
 
 @Injectable()
-export class GetAuthorService {
+export class DeleteAuthorService {
   constructor(
     private readonly authorRepository: AuthorRepository,
     private readonly exceptionService: ExceptionService,
   ) {}
 
-  async getAuthor(id: string) {
+  async deleteAuthor(id: string) {
     const author = await this.authorRepository.findById(id);
 
     if (!author) {
@@ -21,6 +20,6 @@ export class GetAuthorService {
       );
     }
 
-    return author;
+    return this.authorRepository.softDelete(id);
   }
 }
