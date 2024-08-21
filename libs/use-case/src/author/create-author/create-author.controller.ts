@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { Body, Post } from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { createResponse } from '@lib/use-case/rest-api';
 
@@ -8,6 +8,7 @@ import { CreateAuthorRequest } from './create-author.request';
 import { CreateAuthorResponse } from './create-author.response';
 import { CreateAuthorService } from './create-author.service';
 
+@ApiTags('Authors')
 @Controller('authors')
 export class CreateAuthorController {
   constructor(private readonly createAuthorService: CreateAuthorService) {}

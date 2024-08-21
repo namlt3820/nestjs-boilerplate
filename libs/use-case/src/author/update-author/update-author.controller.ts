@@ -1,6 +1,6 @@
 import { Controller, Patch } from '@nestjs/common';
 import { Body } from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { createResponse } from '@lib/use-case/rest-api';
 
@@ -8,6 +8,7 @@ import { UpdateAuthorRequest } from './update-author.request';
 import { UpdateAuthorResponse } from './update-author.response';
 import { UpdateAuthorService } from './update-author.service';
 
+@ApiTags('Authors')
 @Controller('authors')
 export class UpdateAuthorController {
   constructor(private readonly updateAuthorService: UpdateAuthorService) {}
