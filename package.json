@@ -21,7 +21,9 @@
     "copyAssets": "node -e \"require('fs').cpSync('./libs/config/src/app-i18n/loaders', './dist/libs/config/app-i18n', {recursive: true});\"",
     "postbuild": "npm run copyAssets",
     "prestart:dev": "npm run copyAssets",
-    "prestart": "npm run copyAssets"
+    "prestart": "npm run copyAssets",
+    "typeorm:generate": "typeorm-ts-node-commonjs migration:generate -d migrations/typeorm/data-source.ts",
+    "typeorm:run": "typeorm-ts-node-commonjs migration:run -d migrations/typeorm/data-source.ts"
   },
   "dependencies": {
     "@nestjs/cache-manager": "^2.2.2",

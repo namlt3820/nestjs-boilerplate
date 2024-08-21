@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
-import { BaseResponse, BaseResponseDto } from '@lib/use-case/rest-api';
+import { BaseResponse, BaseResponseMongoDto } from '@lib/use-case/rest-api';
 import { MongoosePaginationResponse } from '@lib/use-case/rest-api/pagination.response';
 
-export class Author extends BaseResponseDto {
+export class Author extends BaseResponseMongoDto {
   @ApiProperty()
   first_name: string;
 

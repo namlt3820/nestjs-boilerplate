@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
-import { BaseResponse, BaseResponseDto } from '@lib/use-case/rest-api';
+import { BaseResponse, BaseResponseMongoDto } from '@lib/use-case/rest-api';
 
-export class UpdatedAuthorData extends BaseResponseDto {
+export class UpdatedAuthorData extends BaseResponseMongoDto {
   @ApiProperty()
   first_name: string;
 

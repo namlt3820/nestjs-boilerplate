@@ -1,4 +1,5 @@
 import {
+  DeepPartial,
   EntityManager,
   EntityTarget,
   FindManyOptions,
@@ -16,7 +17,7 @@ export class GenericRepository<T extends { id: string }> {
     this.repository = this.entityManager.getRepository(this.entity);
   }
 
-  async create(entity: T): Promise<T> {
+  async create(entity: DeepPartial<T>): Promise<T> {
     return this.repository.save(entity);
   }
 
