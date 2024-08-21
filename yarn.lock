@@ -4614,6 +4614,11 @@ nestjs-i18n@^10.4.5:
     js-yaml "^4.1.0"
     string-format "^2.0.0"
 
+nestjs-typeorm-paginate@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/nestjs-typeorm-paginate/-/nestjs-typeorm-paginate-4.0.4.tgz#cc705100dc19a1ed4014830930180d0ab650560a"
+  integrity sha512-arinWDc78wPV/EYWMmLYyeMSE5Lae1FHWD/2QpOdTmHaOVqK4PYf19EqZBqT9gbbPugkNW9JAMz3G2WmvSgR/A==
+
 next-tick@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"

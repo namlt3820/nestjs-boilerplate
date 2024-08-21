@@ -8,11 +8,11 @@ import {
 } from 'typeorm';
 
 export class GenericRepository<T extends { id: string }> {
-  private readonly repository: Repository<T>;
+  protected readonly repository: Repository<T>;
 
   constructor(
-    private readonly entity: EntityTarget<T>,
-    private readonly entityManager: EntityManager,
+    protected readonly entity: EntityTarget<T>,
+    protected readonly entityManager: EntityManager,
   ) {
     this.repository = this.entityManager.getRepository(this.entity);
   }
@@ -29,6 +29,14 @@ export class GenericRepository<T extends { id: string }> {
   }
 
   async findAll(options: FindManyOptions<T>): Promise<[T[], number]> {
+    if (!options.hasOwnProperty('skip')) {
+      options.skip = 0;
+    }
+
+    if (!options.hasOwnProperty('take')) {
+      options.take = 1;
+    }
+
     return this.repository.findAndCount(options);
   }
 

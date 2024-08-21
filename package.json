@@ -46,6 +46,7 @@
     "mongoose-paginate-v2": "^1.8.3",
     "mqtt": "^5.10.0",
     "nestjs-i18n": "^10.4.5",
+    "nestjs-typeorm-paginate": "^4.0.4",
     "pg": "^8.12.0",
     "redis": "^4.7.0",
     "reflect-metadata": "^0.2.0",

@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 
 import { CreateEditorModule } from './create-editor';
+import { GetEditorsModule } from './get-editors';
 
 @Module({
-  imports: [CreateEditorModule],
+  imports: [CreateEditorModule, GetEditorsModule],
   providers: [],
   exports: [],
 })

@@ -30,3 +30,27 @@ export class MongoosePaginationResponse<T> {
   @ApiProperty()
   nextPage: null | number;
 }
+
+export class TypeOrmPaginationMeta {
+  @ApiProperty()
+  totalItems: number;
+
+  @ApiProperty()
+  itemCount: number;
+
+  @ApiProperty()
+  itemsPerPage: number;
+
+  @ApiProperty()
+  totalPages: number;
+
+  @ApiProperty()
+  currentPage: number;
+}
+
+export class TypeOrmPaginationResponse<T> {
+  items: T[];
+
+  @ApiProperty()
+  meta: TypeOrmPaginationMeta;
+}
