@@ -14,7 +14,7 @@ export class EditorRepository extends GenericRepository<EditorEntity> {
   }
 
   async paginate(params: GetEditorsRequest) {
-    const { page = 1, limit = 1, name } = params;
+    const { page = 1, limit = 10, name } = params;
 
     const queryBuilder = this.repository.createQueryBuilder('editor');
 

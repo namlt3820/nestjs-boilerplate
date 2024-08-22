@@ -21,10 +21,7 @@ const sequelizeModuleAsyncOptions: SequelizeModuleAsyncOptions = {
 };
 
 @Module({
-  imports: [
-    SequelizeModule.forRootAsync(sequelizeModuleAsyncOptions),
-    SequelizeModule.forFeature(models),
-  ],
+  imports: [SequelizeModule.forRootAsync(sequelizeModuleAsyncOptions)],
   providers: [],
   exports: [],
 })
