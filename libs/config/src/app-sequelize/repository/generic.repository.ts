@@ -21,22 +21,40 @@ export class GenericRepository<T extends Model> {
   async findAll(
     options: FindAndCountOptions<Attributes<T>> & {
       page?: number;
-      pageSize?: number;
+      limit?: number;
     },
     transaction?: Transaction,
-  ): Promise<{ rows: T[]; count: number }> {
-    const { page = 1, pageSize = 10, ...queryOptions } = options;
+  ): Promise<{
+    docs: T[];
+    meta: {
+      totalItems: number;
+      page: number;
+      limit: number;
+      totalPages: number;
+    };
+  }> {
+    const { page = 1, limit = 10, ...queryOptions } = options;
 
     const paginatedOptions: FindOptions<Attributes<T>> = {
       ...queryOptions,
-      limit: pageSize,
-      offset: (page - 1) * pageSize,
+      limit: limit,
+      offset: (page - 1) * limit,
     };
 
-    return this.model.findAndCountAll({
+    const { count, rows } = await this.model.findAndCountAll({
       ...paginatedOptions,
       transaction,
     });
+
+    return {
+      docs: rows,
+      meta: {
+        totalItems: count,
+        totalPages: Math.ceil(count / limit),
+        page,
+        limit,
+      },
+    };
   }
 
   async findById(id: string, transaction?: Transaction): Promise<T | null> {

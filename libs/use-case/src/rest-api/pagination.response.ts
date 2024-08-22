@@ -54,3 +54,24 @@ export class TypeOrmPaginationResponse<T> {
   @ApiProperty()
   meta: TypeOrmPaginationMeta;
 }
+
+export class SequelizePaginationMeta {
+  @ApiProperty()
+  totalItems: number;
+
+  @ApiProperty()
+  totalPages: number;
+
+  @ApiProperty()
+  page: number;
+
+  @ApiProperty()
+  limit: number;
+}
+
+export class SequelizePaginationResponse<T> {
+  docs: T[];
+
+  @ApiProperty()
+  meta: SequelizePaginationMeta;
+}
