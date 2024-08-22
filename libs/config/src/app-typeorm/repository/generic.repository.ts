@@ -6,6 +6,7 @@ import {
   FindOneOptions,
   Repository,
 } from 'typeorm';
+import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 export class GenericRepository<T extends { id: string }> {
   protected readonly repository: Repository<T>;
@@ -46,5 +47,17 @@ export class GenericRepository<T extends { id: string }> {
 
   async delete(id: string): Promise<void> {
     await this.repository.delete(id);
+  }
+
+  async update(id: string, updateData: QueryDeepPartialEntity<T>): Promise<T> {
+    const updatedEntity = await this.repository
+      .createQueryBuilder()
+      .update()
+      .set(updateData)
+      .where('id = :id', { id })
+      .returning('*')
+      .execute();
+
+    return updatedEntity.raw[0];
   }
 }
