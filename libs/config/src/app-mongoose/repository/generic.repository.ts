@@ -49,7 +49,7 @@ export class GenericRepository<T extends Document> {
       ...omitBy(filter, isNil),
       deleted_at: { $exists: false },
     };
-    const { page = 1, limit = 1, session } = paginationOptions;
+    const { page = 1, limit = 10, session } = paginationOptions;
 
     return this.model.paginate(sanitizedFilter, {
       page,

@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
-export class GenericRepository<T extends { id: string }> {
+export class GenericRepository<T> {
   protected readonly repository: Repository<T>;
 
   constructor(
@@ -30,12 +30,12 @@ export class GenericRepository<T extends { id: string }> {
   }
 
   async findAll(options: FindManyOptions<T>): Promise<[T[], number]> {
-    if (!options.hasOwnProperty('skip')) {
+    if (options.skip === undefined) {
       options.skip = 0;
     }
 
-    if (!options.hasOwnProperty('take')) {
-      options.take = 1;
+    if (options.take === undefined) {
+      options.take = 10;
     }
 
     return this.repository.findAndCount(options);
@@ -59,5 +59,9 @@ export class GenericRepository<T extends { id: string }> {
       .execute();
 
     return updatedEntity.raw[0];
+  }
+
+  async softDelete(id: string) {
+    await this.repository.softDelete(id);
   }
 }

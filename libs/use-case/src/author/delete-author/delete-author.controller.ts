@@ -17,7 +17,7 @@ export class DeleteAuthorController {
     description: 'The author has been successfully deleted.',
     type: DeleteAuthorResponse,
   })
-  async createAuthor(@Param('id') id: string): Promise<DeleteAuthorResponse> {
+  async deleteAuthor(@Param('id') id: string): Promise<DeleteAuthorResponse> {
     const author = await this.deleteAuthorService.deleteAuthor(id);
 
     return createResponse(DeleteAuthorResponse, author);

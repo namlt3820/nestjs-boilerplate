@@ -16,7 +16,7 @@ export class UpdateEditorController {
   @Patch()
   @ApiResponse({
     status: 201,
-    description: 'The author has been successfully updated.',
+    description: 'The editor has been successfully updated.',
     type: UpdateEditorResponse,
   })
   async updateEditor(@Body() body: UpdateEditorRequest) {
