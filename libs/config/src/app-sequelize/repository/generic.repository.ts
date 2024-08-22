@@ -47,7 +47,7 @@ export class GenericRepository<T extends Model> {
     });
 
     return {
-      docs: rows,
+      docs: rows.map(({ dataValues }) => dataValues),
       meta: {
         totalItems: count,
         totalPages: Math.ceil(count / limit),
@@ -58,7 +58,8 @@ export class GenericRepository<T extends Model> {
   }
 
   async findById(id: string, transaction?: Transaction): Promise<T | null> {
-    return this.model.findByPk(id, { transaction });
+    const record = await this.model.findByPk(id, { transaction });
+    return record?.dataValues;
   }
 
   async create(

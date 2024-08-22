@@ -20,7 +20,8 @@ export class User extends BaseResponsePostgresDto {
 
 export class GetUsersData extends SequelizePaginationResponse<User> {
   @ApiProperty({ type: [User] })
-  data: User[];
+  @Type(() => User)
+  docs: User[];
 }
 
 export class GetUsersResponse extends BaseResponse {

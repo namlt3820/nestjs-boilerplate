@@ -21,6 +21,8 @@ export class GetUsersController {
   async getUsers(@Query() query: GetUsersRequest): Promise<GetUsersResponse> {
     const users = await this.getUsersService.getUsers(query);
 
+    console.log({ users });
+
     return createResponse(GetUsersResponse, users);
   }
 }
