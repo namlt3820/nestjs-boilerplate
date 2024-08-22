@@ -10,6 +10,7 @@ import { AppTypeOrmModule } from '@lib/config/app-typeorm';
 import { AuthorModule } from '@lib/use-case/author';
 import { EditorModule } from '@lib/use-case/editor';
 import { ExceptionModule } from '@lib/use-case/exception';
+import { UserModule } from '@lib/use-case/user';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ExceptionModule } from '@lib/use-case/exception';
     ExceptionModule,
     AuthorModule,
     EditorModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],

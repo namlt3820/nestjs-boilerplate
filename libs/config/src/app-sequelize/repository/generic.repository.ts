@@ -47,7 +47,8 @@ export class GenericRepository<T extends Model> {
     item: MakeNullishOptional<Attributes<T>>,
     transaction?: Transaction,
   ): Promise<T> {
-    return this.model.create<T>(item, { transaction });
+    const record = await this.model.create<T>(item, { transaction });
+    return record.dataValues;
   }
 
   async update(
