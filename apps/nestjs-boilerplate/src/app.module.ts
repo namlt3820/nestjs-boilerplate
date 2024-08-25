@@ -11,6 +11,7 @@ import { AuthModule } from '@lib/use-case/auth';
 import { AuthorModule } from '@lib/use-case/author/author.module';
 import { EditorModule } from '@lib/use-case/editor/editor.module';
 import { ExceptionModule } from '@lib/use-case/exception';
+import { MicroserviceModule } from '@lib/use-case/microservice/microservice.module';
 import { UserModule } from '@lib/use-case/user/user.module';
 
 @Module({
@@ -30,6 +31,7 @@ import { UserModule } from '@lib/use-case/user/user.module';
     EditorModule,
     UserModule,
     AuthModule,
+    MicroserviceModule,
   ],
   controllers: [],
   providers: [],
