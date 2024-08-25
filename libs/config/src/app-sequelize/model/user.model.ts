@@ -6,6 +6,7 @@ export const UserTableName = 'users';
 
 @Table({
   tableName: UserTableName,
+  paranoid: true,
 })
 export class UserModel extends GenericModel {
   @Column

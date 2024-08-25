@@ -57,9 +57,13 @@ export class GenericRepository<T extends Model> {
     };
   }
 
-  async findById(id: string, transaction?: Transaction): Promise<T | null> {
-    const record = await this.model.findByPk(id, { transaction });
-    return record?.dataValues;
+  async findById(
+    id: string,
+    options?: Omit<FindOptions<Attributes<T>>, 'where'>,
+    transaction?: Transaction,
+  ): Promise<T | null> {
+    const record = await this.model.findByPk(id, { transaction, ...options });
+    return record?.dataValues || null;
   }
 
   async create(
