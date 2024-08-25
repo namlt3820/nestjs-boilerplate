@@ -74,12 +74,18 @@ export class GenericRepository<T extends Model> {
     id: string,
     updates: Partial<Attributes<T>>,
     transaction?: Transaction,
-  ): Promise<[number, T[]]> {
-    return this.model.update(updates, {
+  ): Promise<T | null> {
+    const [affectedCount, updatedRecords] = await this.model.update(updates, {
       where: { id } as WhereOptions<T>,
       returning: true,
       transaction,
     });
+
+    if (affectedCount === 0) {
+      return null;
+    }
+
+    return updatedRecords[0].dataValues || null;
   }
 
   async delete(id: string, transaction?: Transaction): Promise<number> {

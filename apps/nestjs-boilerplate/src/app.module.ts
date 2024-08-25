@@ -7,10 +7,10 @@ import { AppMicroserviceModule } from '@lib/config/app-microservice';
 import { AppMongooseModule } from '@lib/config/app-mongoose';
 import { AppSequelizeModule } from '@lib/config/app-sequelize';
 import { AppTypeOrmModule } from '@lib/config/app-typeorm';
-import { AuthorModule } from '@lib/use-case/author';
-import { EditorModule } from '@lib/use-case/editor';
+import { AuthorModule } from '@lib/use-case/author/author.module';
+import { EditorModule } from '@lib/use-case/editor/editor.module';
 import { ExceptionModule } from '@lib/use-case/exception';
-import { UserModule } from '@lib/use-case/user';
+import { UserModule } from '@lib/use-case/user/user.module';
 
 @Module({
   imports: [
