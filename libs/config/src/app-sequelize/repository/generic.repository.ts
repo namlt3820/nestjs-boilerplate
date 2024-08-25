@@ -10,7 +10,7 @@ import { Model, ModelCtor } from 'sequelize-typescript';
 import { MakeNullishOptional } from 'sequelize/types/utils';
 
 export class GenericRepository<T extends Model> {
-  private model: ModelCtor<T>;
+  protected model: ModelCtor<T>;
   private sequelize: Sequelize;
 
   constructor(model: ModelCtor<T>, sequelize: Sequelize) {

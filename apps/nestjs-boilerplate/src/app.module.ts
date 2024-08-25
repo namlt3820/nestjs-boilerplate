@@ -7,6 +7,7 @@ import { AppMicroserviceModule } from '@lib/config/app-microservice';
 import { AppMongooseModule } from '@lib/config/app-mongoose';
 import { AppSequelizeModule } from '@lib/config/app-sequelize';
 import { AppTypeOrmModule } from '@lib/config/app-typeorm';
+import { AuthModule } from '@lib/use-case/auth';
 import { AuthorModule } from '@lib/use-case/author/author.module';
 import { EditorModule } from '@lib/use-case/editor/editor.module';
 import { ExceptionModule } from '@lib/use-case/exception';
@@ -28,6 +29,7 @@ import { UserModule } from '@lib/use-case/user/user.module';
     AuthorModule,
     EditorModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

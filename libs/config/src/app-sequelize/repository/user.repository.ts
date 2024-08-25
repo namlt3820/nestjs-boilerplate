@@ -13,4 +13,12 @@ export class UserRepository extends GenericRepository<UserModel> {
   ) {
     super(model, sequelize);
   }
+
+  async getByEmail(email: string) {
+    const record = await this.model.findOne({
+      where: { email },
+    });
+
+    return record?.dataValues || null;
+  }
 }
