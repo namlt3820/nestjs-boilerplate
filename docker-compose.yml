@@ -54,12 +54,25 @@ services:
     networks:
       - app-network
 
+  nats:
+    container_name: nest_boilerplate_nats
+    image: nats:latest
+    ports:
+      - '4222:4222' # Default NATS client port
+      - '8222:8222' # Monitoring port (optional)
+      - '6222:6222' # Cluster port (optional)
+    command: ['-js', '--store_dir=/data'] # Enabling JetStream with data storage
+    volumes:
+      - nats_data:/data
+
 volumes:
   postgres_data:
     driver: local
   mongodb_data:
     driver: local
   redis_data:
+    driver: local
+  nats_data:
     driver: local
 
 networks:

@@ -34,4 +34,14 @@ export class MicroserviceController {
   async handleMqttEvent(data: any) {
     console.log(data);
   }
+
+  @MessagePattern({ cmd: 'handle_nats_message' }, Transport.NATS)
+  handleNatsMessage(data: any) {
+    return data;
+  }
+
+  @EventPattern('handle_nats_event', Transport.NATS)
+  async handleNatsEvent(data: any) {
+    console.log(data);
+  }
 }

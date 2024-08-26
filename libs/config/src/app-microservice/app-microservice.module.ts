@@ -40,6 +40,18 @@ const clientsModuleProvider: Provider[] = [
     },
     provide: 'TCP_SERVICE',
   },
+  {
+    inject: [ConfigService],
+    useFactory: (configService: ConfigService) => {
+      return ClientProxyFactory.create({
+        transport: Transport.NATS,
+        options: {
+          servers: [configService.get<string>('nats.url')],
+        },
+      });
+    },
+    provide: 'NATS_SERVICE',
+  },
 ];
 
 @Global()

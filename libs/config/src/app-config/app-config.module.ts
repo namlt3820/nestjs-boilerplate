@@ -6,6 +6,7 @@ import {
   JwtConfig,
   MongoConfig,
   MqttConfig,
+  NatsConfig,
   PostgresConfig,
   RedisConfig,
 } from './configs';
@@ -15,41 +16,39 @@ const configModuleOptions: ConfigModuleOptions = {
   /**
    * remove configs to load if the project doesnt need them
    */
-  load: [MongoConfig, PostgresConfig, RedisConfig, JwtConfig, MqttConfig],
+  load: [
+    MongoConfig,
+    PostgresConfig,
+    RedisConfig,
+    JwtConfig,
+    MqttConfig,
+    NatsConfig,
+  ],
 
   validationSchema: Joi.object({
-    /**
-     * mongo
-     */
+    // mongo
     MONGO_URI: Joi.string().required(),
 
-    /**
-     * postgres
-     */
+    // postgres
     POSTGRES_URI: Joi.string().required(),
 
-    /**
-     * language
-     */
+    // language
     FALLBACK_LANGUAGE: Joi.string().required(),
 
-    /**
-     * redis
-     */
+    // redis
     REDIS_HOST: Joi.string().required(),
     REDIS_PORT: Joi.string().required(),
     REDIS_PASSWORD: Joi.string().required(),
 
-    /**
-     * jwt
-     */
+    // jwt
     JWT_PUBLIC_KEY: Joi.string().required(),
     JWT_PRIVATE_KEY: Joi.string().required(),
 
-    /**
-     * mqtt
-     */
+    // mqtt
     MQTT_URL: Joi.string().required(),
+
+    // nats
+    NATS_URL: Joi.string().required(),
   }),
 };
 
