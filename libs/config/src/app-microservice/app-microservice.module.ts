@@ -68,6 +68,20 @@ const clientsModuleProvider: Provider[] = [
     },
     provide: 'RABBITMQ_SERVICE',
   },
+  {
+    inject: [ConfigService],
+    useFactory: (configService: ConfigService) => {
+      return ClientProxyFactory.create({
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            brokers: [configService.get<string>('kafka.url')],
+          },
+        },
+      });
+    },
+    provide: 'KAFKA_SERVICE',
+  },
 ];
 
 @Global()

@@ -1,5 +1,5 @@
-import { Controller, Get, Inject } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
+import { Controller, Get, Inject, OnModuleInit } from '@nestjs/common';
+import { ClientKafka, ClientProxy } from '@nestjs/microservices';
 import { ApiTags } from '@nestjs/swagger';
 import { Observable, timeout } from 'rxjs';
 
@@ -7,13 +7,14 @@ const payload = { hello: 'world' };
 
 @ApiTags('Microservices')
 @Controller('microservice')
-export class MicroserviceController {
+export class MicroserviceController implements OnModuleInit {
   constructor(
     @Inject('TCP_SERVICE') private tcpClient: ClientProxy,
     @Inject('REDIS_SERVICE') private redisClient: ClientProxy,
     @Inject('MQTT_SERVICE') private mqttClient: ClientProxy,
     @Inject('NATS_SERVICE') private natsClient: ClientProxy,
     @Inject('RABBITMQ_SERVICE') private rabbitMqClient: ClientProxy,
+    @Inject('KAFKA_SERVICE') private kafkaClient: ClientKafka,
   ) {}
 
   @Get('tcp-message')
@@ -69,5 +70,20 @@ export class MicroserviceController {
   @Get('rabbitmq-event')
   sendRabbitMqEvent() {
     this.rabbitMqClient.emit('handle_rabbitmq_event', payload);
+  }
+
+  @Get('kafka-message')
+  sendKafkaMessage(): Observable<any> {
+    const topic = 'handle_kakfa_message';
+    return this.kafkaClient.send(topic, payload).pipe(timeout(5000));
+  }
+
+  @Get('kafka-event')
+  sendKafkaMqEvent() {
+    this.kafkaClient.emit('handle_kafka_event', payload);
+  }
+
+  onModuleInit() {
+    this.kafkaClient.subscribeToResponseOf('handle_kakfa_message');
   }
 }

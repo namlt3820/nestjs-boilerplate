@@ -1,4 +1,5 @@
 import JwtConfig from './jwt.config';
+import KafkaConfig from './kafka.config';
 import MongoConfig from './mongo.config';
 import MqttConfig from './mqtt.config';
 import NatsConfig from './nats.config';
@@ -14,4 +15,5 @@ export {
   RedisConfig,
   NatsConfig,
   RabbitMqConfig,
+  KafkaConfig,
 };

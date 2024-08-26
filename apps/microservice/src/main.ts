@@ -54,6 +54,19 @@ async function bootstrap() {
     },
   });
 
+  // kafka
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.KAFKA,
+    options: {
+      client: {
+        brokers: [configService.get<string>('kafka.url')],
+      },
+      consumer: {
+        groupId: 'consumer-group',
+      },
+    },
+  });
+
   await app.startAllMicroservices();
   await app.listen(3001);
 }

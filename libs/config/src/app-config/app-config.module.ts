@@ -4,6 +4,7 @@ import * as Joi from 'joi';
 
 import {
   JwtConfig,
+  KafkaConfig,
   MongoConfig,
   MqttConfig,
   NatsConfig,
@@ -25,6 +26,7 @@ const configModuleOptions: ConfigModuleOptions = {
     MqttConfig,
     NatsConfig,
     RabbitMqConfig,
+    KafkaConfig,
   ],
 
   validationSchema: Joi.object({
@@ -54,6 +56,9 @@ const configModuleOptions: ConfigModuleOptions = {
 
     // rabbitmq
     RABBITMQ_URL: Joi.string().required(),
+
+    // kafka
+    KAFKA_URL: Joi.string().required(),
   }),
 };
 

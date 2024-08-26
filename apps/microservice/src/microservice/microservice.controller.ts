@@ -1,5 +1,10 @@
 import { Controller } from '@nestjs/common';
-import { EventPattern, MessagePattern, Transport } from '@nestjs/microservices';
+import {
+  EventPattern,
+  MessagePattern,
+  Payload,
+  Transport,
+} from '@nestjs/microservices';
 
 @Controller()
 export class MicroserviceController {
@@ -52,6 +57,16 @@ export class MicroserviceController {
 
   @EventPattern('handle_rabbitmq_event', Transport.RMQ)
   async handleRabbitMqEvent(data: any) {
+    console.log(data);
+  }
+
+  @MessagePattern('handle_kakfa_message', Transport.KAFKA)
+  handleRequest(@Payload() data: any): any {
+    return data;
+  }
+
+  @EventPattern('handle_kafka_event', Transport.KAFKA)
+  async handleKafkaEvent(@Payload() data: any) {
     console.log(data);
   }
 }
