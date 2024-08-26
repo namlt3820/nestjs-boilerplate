@@ -2,14 +2,14 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
-import { MicroserviceModule } from './microservice.module';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(MicroserviceModule);
+  const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
   // tcp
-  const microserviceTcp = app.connectMicroservice<MicroserviceOptions>({
+  app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.TCP,
     options: {
       port: 3002,
@@ -17,7 +17,7 @@ async function bootstrap() {
   });
 
   // redis
-  const microserviceRedis = app.connectMicroservice<MicroserviceOptions>({
+  app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.REDIS,
     options: {
       host: configService.get<string>('redis.host'),
@@ -27,7 +27,7 @@ async function bootstrap() {
   });
 
   // mqtt
-  const microserviceMqtt = app.connectMicroservice<MicroserviceOptions>({
+  app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.MQTT,
     options: {
       url: configService.get<string>('mqtt.url'),

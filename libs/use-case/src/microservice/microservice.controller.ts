@@ -1,9 +1,11 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { ApiTags } from '@nestjs/swagger';
 import { Observable, timeout } from 'rxjs';
 
 const payload = { hello: 'world' };
 
+@ApiTags('Microservices')
 @Controller('microservice')
 export class MicroserviceController {
   constructor(

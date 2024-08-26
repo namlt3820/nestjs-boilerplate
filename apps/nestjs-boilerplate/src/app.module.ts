@@ -14,6 +14,8 @@ import { ExceptionModule } from '@lib/use-case/exception';
 import { MicroserviceModule } from '@lib/use-case/microservice/microservice.module';
 import { UserModule } from '@lib/use-case/user/user.module';
 
+import { AppSocketModule } from './app-socket';
+
 @Module({
   imports: [
     // config modules
@@ -24,6 +26,7 @@ import { UserModule } from '@lib/use-case/user/user.module';
     AppSequelizeModule,
     AppCacheModule,
     AppMicroserviceModule,
+    AppSocketModule,
 
     // use-case modules
     ExceptionModule,
