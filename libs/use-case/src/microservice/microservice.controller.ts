@@ -13,6 +13,7 @@ export class MicroserviceController {
     @Inject('REDIS_SERVICE') private redisClient: ClientProxy,
     @Inject('MQTT_SERVICE') private mqttClient: ClientProxy,
     @Inject('NATS_SERVICE') private natsClient: ClientProxy,
+    @Inject('RABBITMQ_SERVICE') private rabbitMqClient: ClientProxy,
   ) {}
 
   @Get('tcp-message')
@@ -57,5 +58,16 @@ export class MicroserviceController {
   @Get('nats-event')
   sendNatsEvent() {
     this.natsClient.emit('handle_nats_event', payload);
+  }
+
+  @Get('rabbitmq-message')
+  sendRabbitMqMessage(): Observable<any> {
+    const pattern = { cmd: 'handle_rabbitmq_message' };
+    return this.rabbitMqClient.send(pattern, payload).pipe(timeout(5000));
+  }
+
+  @Get('rabbitmq-event')
+  sendRabbitMqEvent() {
+    this.rabbitMqClient.emit('handle_rabbitmq_event', payload);
   }
 }

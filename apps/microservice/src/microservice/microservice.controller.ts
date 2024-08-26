@@ -44,4 +44,14 @@ export class MicroserviceController {
   async handleNatsEvent(data: any) {
     console.log(data);
   }
+
+  @MessagePattern({ cmd: 'handle_rabbitmq_message' }, Transport.RMQ)
+  handleRabbitMqMessage(data: any) {
+    return data;
+  }
+
+  @EventPattern('handle_rabbitmq_event', Transport.RMQ)
+  async handleRabbitMqEvent(data: any) {
+    console.log(data);
+  }
 }

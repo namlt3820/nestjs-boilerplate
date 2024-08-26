@@ -42,6 +42,18 @@ async function bootstrap() {
     },
   });
 
+  // rabbitmq
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.RMQ,
+    options: {
+      urls: [configService.get<string>('rabbitmq.url')],
+      queue: 'app_queue',
+      queueOptions: {
+        durable: true,
+      },
+    },
+  });
+
   await app.startAllMicroservices();
   await app.listen(3001);
 }

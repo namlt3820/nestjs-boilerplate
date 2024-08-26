@@ -52,6 +52,22 @@ const clientsModuleProvider: Provider[] = [
     },
     provide: 'NATS_SERVICE',
   },
+  {
+    inject: [ConfigService],
+    useFactory: (configService: ConfigService) => {
+      return ClientProxyFactory.create({
+        transport: Transport.RMQ,
+        options: {
+          urls: [configService.get<string>('rabbitmq.url')],
+          queue: 'app_queue',
+          queueOptions: {
+            durable: true,
+          },
+        },
+      });
+    },
+    provide: 'RABBITMQ_SERVICE',
+  },
 ];
 
 @Global()

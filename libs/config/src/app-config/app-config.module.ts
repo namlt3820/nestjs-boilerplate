@@ -8,6 +8,7 @@ import {
   MqttConfig,
   NatsConfig,
   PostgresConfig,
+  RabbitMqConfig,
   RedisConfig,
 } from './configs';
 
@@ -23,6 +24,7 @@ const configModuleOptions: ConfigModuleOptions = {
     JwtConfig,
     MqttConfig,
     NatsConfig,
+    RabbitMqConfig,
   ],
 
   validationSchema: Joi.object({
@@ -49,6 +51,9 @@ const configModuleOptions: ConfigModuleOptions = {
 
     // nats
     NATS_URL: Joi.string().required(),
+
+    // rabbitmq
+    RABBITMQ_URL: Joi.string().required(),
   }),
 };
 
