@@ -14,6 +14,7 @@ services:
       - 'postgres_data:/data/postgres'
     networks:
       - app-network
+    restart: unless-stopped
 
   mongodb:
     container_name: nest_boilerplate_mongo
@@ -27,11 +28,11 @@ services:
       - 'mongodb_data:/data/db'
     networks:
       - app-network
+    restart: unless-stopped
 
   redis:
     container_name: nest_boilerplate_redis
     image: redis:6.2-alpine
-    restart: always
     ports:
       - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning --requirepass redis_123
@@ -39,11 +40,11 @@ services:
       - 'redis_data:/data'
     networks:
       - app-network
+    restart: unless-stopped
 
   mosquitto:
     image: eclipse-mosquitto
     container_name: nest_boilerplate_mosquitto
-    restart: unless-stopped
     volumes:
       - ./mosquitto:/mosquitto
       - ./mosquitto/data:/mosquitto/data
@@ -53,6 +54,7 @@ services:
       - 9002:9001
     networks:
       - app-network
+    restart: unless-stopped
 
   nats:
     container_name: nest_boilerplate_nats
@@ -64,6 +66,7 @@ services:
     command: ['-js', '--store_dir=/data'] # Enabling JetStream with data storage
     volumes:
       - nats_data:/data
+    restart: unless-stopped
 
   rabbitmq:
     container_name: nest_boilerplate_rabbitmq
@@ -76,19 +79,25 @@ services:
       RABBITMQ_DEFAULT_PASS: password
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+    restart: unless-stopped
 
   zookeeper:
-    container_name: nest_boilerplate_zookeeper
     image: confluentinc/cp-zookeeper:7.0.1
+    container_name: nest_boilerplate_zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - '2181:2181'
     volumes:
       - zookeeper_data:/var/lib/zookeeper
+    networks:
+      - app-network
+    restart: unless-stopped
 
   kafka:
-    container_name: nest_boilerplate_kafka
     image: confluentinc/cp-kafka:7.0.1
+    container_name: nest_boilerplate_kafka
     ports:
       - '9092:9092'
     environment:
@@ -100,8 +109,9 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - zookeeper
-    volumes:
-      - kafka_data:/var/lib/kafka/data
+    networks:
+      - app-network
+    restart: unless-stopped
 
 volumes:
   postgres_data:
@@ -115,8 +125,6 @@ volumes:
   rabbitmq_data:
     driver: local
   zookeeper_data:
-    driver: local
-  kafka_data:
     driver: local
 
 networks:
