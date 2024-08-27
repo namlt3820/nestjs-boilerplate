@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
+import { ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 
 import { Hero, HeroById } from './interfaces';
@@ -14,7 +15,7 @@ import { Hero, HeroById } from './interfaces';
 interface HeroesService {
   findOne(data: HeroById): Observable<Hero>;
 }
-
+@ApiTags('Microservices')
 @Controller('grpc')
 export class AppGrpcController implements OnModuleInit {
   private heroesService: HeroesService;

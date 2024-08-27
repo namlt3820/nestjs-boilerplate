@@ -8,7 +8,11 @@ import {
   UpdateQuery,
 } from 'mongoose';
 
-import { PaginationOptions } from '@lib/use-case/types/paginationOptions';
+export interface PaginationOptions {
+  page?: number;
+  limit?: number;
+  session?: ClientSession;
+}
 
 export class GenericRepository<T extends Document> {
   protected readonly model: PaginateModel<T>;
