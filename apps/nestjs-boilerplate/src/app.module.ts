@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 
-import { AppConfigModule } from '@lib/config';
 import { AppCacheModule } from '@lib/config/app-cache';
+import { AppConfigModule } from '@lib/config/app-config';
+import { AppGrpcModule } from '@lib/config/app-grpc/app-grpc.module';
 import { AppI18nModule } from '@lib/config/app-i18n';
 import { AppMicroserviceModule } from '@lib/config/app-microservice';
 import { AppMongooseModule } from '@lib/config/app-mongoose';
@@ -27,6 +28,7 @@ import { AppSocketModule } from './app-socket';
     AppCacheModule,
     AppMicroserviceModule,
     AppSocketModule,
+    AppGrpcModule,
 
     // use-case modules
     ExceptionModule,

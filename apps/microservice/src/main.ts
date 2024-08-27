@@ -1,6 +1,8 @@
+import { ReflectionService } from '@grpc/reflection';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { join } from 'path';
 
 import { AppModule } from './app.module';
 
@@ -63,6 +65,19 @@ async function bootstrap() {
       },
       consumer: {
         groupId: 'consumer-group',
+      },
+    },
+  });
+
+  // grpc
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.GRPC,
+    options: {
+      package: 'hero',
+      protoPath: join(__dirname, '../../libs/config/app-grpc.proto'),
+      url: 'localhost:3003',
+      onLoadPackageDefinition: (pkg, server) => {
+        new ReflectionService(pkg).addToServer(server);
       },
     },
   });
