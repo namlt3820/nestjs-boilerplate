@@ -35,6 +35,14 @@ $ docker compose up --build -d
 # setup env
 $ cp .env.example .env
 
-# start server
+# start main app
 $ yarn start:dev
+
+# start microservice app
+$  yarn start:dev microservice
 ```
+
+## Usage
+
+- Postman: Visit http://localhost:3000
+- Swagger: Visit http://localhost:3000/api
